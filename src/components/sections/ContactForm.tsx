@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Headphones } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -75,29 +76,45 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="bg-[#F4F7FA] py-16 md:py-20 px-4 sm:px-6">
+    <section id="contact" className="bg-[#F8FAFC] py-16 md:py-24 px-4 sm:px-6 relative">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-heading text-ink">Get your credit issue reviewed</h2>
-          <p className="text-muted-text md:text-lg max-w-2xl mx-auto">
-            Tell us a bit about your situation, and our specialists will reach out to guide you.
+        <div className="text-center space-y-3 mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E2E8F0] text-xs font-semibold text-[#FF6B00] shadow-sm">
+            <Headphones className="w-3.5 h-3.5 text-[#FF6B00]" />
+            <span>Free 1-on-1 Consultation</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-heading text-[#0A2540] font-bold tracking-tight">
+            Get your credit issue reviewed
+          </h2>
+          <p className="text-[#4A5568] text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            Tell us about your credit report challenge, and our specialists will review your case and reach out with a direct action plan.
           </p>
         </div>
 
-        <div className="bg-white rounded-lg border border-line p-6 md:p-10 shadow-sm">
+        <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-10 md:p-12 shadow-xl relative overflow-hidden">
+          {/* Top Brand Accent Line */}
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0072CE] via-[#00C4B4] to-[#FF6B00]"></div>
+
           {isSuccess ? (
-            <div className="text-center py-12">
-              <h3 className="font-heading text-xl text-[#0A2540] mb-2">Request Received</h3>
-              <p className="text-muted-text">
-                Your request has been sent. We&apos;ll send a confirmation email shortly.
+            <div className="text-center py-12 space-y-4">
+              <div className="w-16 h-16 bg-[#00C4B4]/15 text-[#00C4B4] rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                ✓
+              </div>
+              <h3 className="font-heading text-2xl font-bold text-[#0A2540]">
+                Intake Request Received
+              </h3>
+              <p className="text-[#4A5568] text-sm max-w-md mx-auto leading-relaxed">
+                Thank you! Our credit specialist is reviewing your submission and will get in touch during your requested time slot.
               </p>
-              <Button
-                variant="outline"
-                className="mt-6 border-[#004AAD] text-[#004AAD]"
-                onClick={() => setIsSuccess(false)}
-              >
-                Submit another request
-              </Button>
+              <div className="pt-4">
+                <Button
+                  variant="outline"
+                  className="border-2 border-[#0072CE] text-[#0072CE] hover:bg-[#0072CE]/10 font-semibold px-6 py-2.5 rounded-lg"
+                  onClick={() => setIsSuccess(false)}
+                >
+                  Submit another request
+                </Button>
+              </div>
             </div>
           ) : (
             <Form {...form}>
@@ -300,17 +317,20 @@ export function ContactForm() {
                   </div>
                 )}
 
-                <p className="text-[13px] text-muted-text italic">
-                  If you ever have a concern about our service, talk to us directly first. We respond honestly and work to resolve it properly.
+                <p className="text-[13px] text-[#718096] italic">
+                  We value your privacy. We will never sell your details or initiate unsolicited marketing phone calls.
                 </p>
-                <Button
+                <button
                   type="submit"
                   disabled={form.formState.isSubmitting}
-                  className="w-full md:w-auto px-8"
-                  style={{ background: "linear-gradient(90deg, #5DE0E6, #004AAD)", color: "#fff" }}
+                  className="w-full md:w-auto bg-[#FF6B00] hover:bg-orange-600 text-white font-bold text-base px-10 py-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {form.formState.isSubmitting ? "Submitting..." : "Submit request"}
-                </Button>
+                  {form.formState.isSubmitting ? (
+                    <span>Submitting...</span>
+                  ) : (
+                    <span>Get your credit issue reviewed &rarr;</span>
+                  )}
+                </button>
               </form>
             </Form>
           )}

@@ -1,43 +1,118 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import Image from "next/image";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  Star, 
+  ShieldCheck, 
+  CheckCircle, 
+  TrendingUp,
+  ShieldAlert,
+  CalendarX2,
+  FileX2,
+  UserX,
+  Scale,
+  Briefcase,
+  Search,
+  AlertOctagon,
+  ClockAlert
+} from "lucide-react";
+import { Review } from "@/lib/reviews-data";
 
-export interface Review {
-  id: string;
-  name: string;
-  city: string;
-  problem: string;
-  quote: string;
-  photoUrl?: string;
-  category?: string;
-}
+const PROBLEM_ICON_MAP = {
+  ShieldAlert,
+  CalendarX2,
+  FileX2,
+  UserX,
+  Scale,
+  Briefcase,
+  Search,
+  AlertOctagon,
+  ClockAlert,
+};
 
 function ReviewCard({ review }: { review: Review }) {
   const [expanded, setExpanded] = useState(false);
-  const isLong = review.quote.length > 150;
+  const isLong = review.quote.length > 140;
+  const ProblemIcon = review.iconKey ? PROBLEM_ICON_MAP[review.iconKey] || ShieldAlert : ShieldAlert;
 
   return (
-    <div className="w-72 sm:w-80 flex-shrink-0 bg-white rounded-xl border border-line flex flex-col justify-between overflow-hidden">
-      
-      {/* Body section */}
-      <div className="p-5 flex flex-col gap-3 flex-1">
-        {/* Issue tag */}
-        <span className="self-start text-xs font-semibold text-[#004AAD] bg-[#E6F8F9] px-2.5 py-1 rounded-full leading-none">
-          {review.problem}
-        </span>
+    <div className="w-80 sm:w-96 flex-shrink-0 bg-white rounded-2xl border border-[#E2E8F0] shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group select-none">
+      {/* Top Header with Stars, Score Bump & Themed Problem Intention Box */}
+      <div className="p-5 sm:p-6 pb-3 flex flex-col gap-3.5">
+        <div className="flex items-center justify-between">
+          {/* 5-Star Rating */}
+          <div className="flex items-center gap-1">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className="w-4 h-4 fill-[#FFCC00] text-[#FFCC00]"
+              />
+            ))}
+          </div>
 
-        {/* Quote — clamped to 3 lines */}
-        <div>
-          <blockquote className={`text-ink text-sm italic leading-relaxed ${!expanded ? "line-clamp-3" : ""}`}>
+          {/* Score Bump Badge */}
+          {review.scoreBump && (
+            <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#4CD964]/15 border border-[#4CD964]/30 text-[11px] font-bold text-[#208a34]">
+              <TrendingUp className="w-3 h-3 text-[#208a34]" />
+              <span>{review.scoreBump}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Themed Problem Intention Box matching Problems We Look At Section */}
+        <div className="rounded-xl border border-[#E2E8F0] p-3.5 bg-[#F8FAFC] group-hover:bg-slate-50/80 transition-colors space-y-2">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{ 
+                  backgroundColor: `${review.impactColor || "#0072CE"}15`, 
+                  color: review.impactColor || "#0072CE" 
+                }}
+              >
+                <ProblemIcon className="w-4 h-4" />
+              </div>
+              <span className="text-[10px] font-bold text-[#718096] uppercase tracking-wider truncate">
+                {review.problemCategory || "Credit Discrepancy"}
+              </span>
+            </div>
+            {review.impactTag && (
+              <span
+                className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0"
+                style={{ 
+                  backgroundColor: `${review.impactColor || "#0072CE"}15`, 
+                  color: review.impactColor || "#0072CE" 
+                }}
+              >
+                {review.impactTag}
+              </span>
+            )}
+          </div>
+          <h4 className="font-heading text-xs sm:text-sm font-bold text-[#0A2540] group-hover:text-[#0072CE] transition-colors leading-snug">
+            {review.problem}
+          </h4>
+          {review.problemDescription && (
+            <p className="text-[11px] text-[#4A5568] leading-relaxed line-clamp-2">
+              {review.problemDescription}
+            </p>
+          )}
+        </div>
+
+        {/* Authentic Quote */}
+        <div className="pt-0.5">
+          <blockquote className={`text-[#0A2540] text-xs sm:text-sm leading-relaxed ${!expanded ? "line-clamp-3" : ""}`}>
             &ldquo;{review.quote}&rdquo;
           </blockquote>
           {isLong && (
             <button
-              onClick={() => setExpanded(!expanded)}
-              className="mt-1 text-xs font-semibold text-[#004AAD] hover:underline focus-visible:outline-none"
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpanded(!expanded);
+              }}
+              className="mt-1 text-xs font-semibold text-[#0072CE] hover:underline focus-visible:outline-none cursor-pointer"
             >
               {expanded ? "Show less ↑" : "Read more ↓"}
             </button>
@@ -45,20 +120,25 @@ function ReviewCard({ review }: { review: Review }) {
         </div>
       </div>
 
-      {/* Author — always pinned at bottom */}
-      <div className="px-5 py-3 border-t border-line flex items-center gap-3">
-        {review.photoUrl ? (
-          <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-[#F4F7FA]">
-            <Image src={review.photoUrl} alt={review.name} width={32} height={32} className="object-cover" />
+      {/* Author Footer */}
+      <div className="px-5 sm:px-6 py-3.5 border-t border-[#E2E8F0] bg-[#F8FAFC]/80 flex items-center justify-between">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#0072CE] to-[#00C4B4] text-white flex items-center justify-center font-bold text-sm shadow-sm flex-shrink-0">
+            {review.name.charAt(0)}
           </div>
-        ) : (
-          <div className="w-8 h-8 rounded-full bg-[#E6F8F9] flex items-center justify-center flex-shrink-0">
-            <span className="text-[#004AAD] font-bold text-sm">{review.name.charAt(0)}</span>
+          <div className="min-w-0">
+            <p className="font-heading text-sm font-bold text-[#0A2540] leading-tight truncate">
+              {review.name}
+            </p>
+            <p className="text-xs text-[#718096] truncate">
+              {review.city}, India
+            </p>
           </div>
-        )}
-        <div className="min-w-0">
-          <p className="font-heading text-sm text-ink leading-tight truncate">{review.name}</p>
-          <p className="text-xs text-muted-text truncate">{review.city}</p>
+        </div>
+
+        <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#00C4B4] bg-[#00C4B4]/10 px-2.5 py-1 rounded-full flex-shrink-0">
+          <CheckCircle className="w-3.5 h-3.5 text-[#00C4B4]" />
+          <span>Resolved</span>
         </div>
       </div>
     </div>
@@ -67,14 +147,34 @@ function ReviewCard({ review }: { review: Review }) {
 
 export function Reviews({ reviews }: { reviews: Review[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const handleScroll = (direction: 'left' | 'right') => {
+  // Auto-scroll loop: continuous smooth scrolling, pause on hover / touch
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        // When nearing end, reset smoothly to beginning
+        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+          scrollRef.current.scrollTo({ left: 0, behavior: "auto" });
+        } else {
+          scrollRef.current.scrollBy({ left: 1, behavior: "auto" });
+        }
+      }
+    }, 28);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleManualScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
       const scrollAmount = clientWidth * 0.75;
       scrollRef.current.scrollTo({
-        left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
-        behavior: 'smooth',
+        left: direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+        behavior: "smooth",
       });
     }
   };
@@ -83,56 +183,75 @@ export function Reviews({ reviews }: { reviews: Review[] }) {
     return null;
   }
 
+  // Duplicate list to create a rich infinite carousel track
+  const allStories = [...reviews, ...reviews];
+
   return (
-    <section id="reviews" className="bg-[#F4F7FA] py-16 md:py-20 px-4 sm:px-6">
+    <section id="reviews" className="bg-[#F8FAFC] py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-          <div className="space-y-2 max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-heading text-ink">What our clients say</h2>
-            <p className="text-muted-text md:text-lg">
-              Real stories from people we&apos;ve helped navigate the credit system.
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E2E8F0] text-xs font-semibold text-[#0072CE] shadow-sm">
+              <Star className="w-3.5 h-3.5 fill-[#FFCC00] text-[#FFCC00]" />
+              <span>Real Customer Stories</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-heading text-[#0A2540] font-bold tracking-tight">
+              Social Proof &amp; Client Success
+            </h2>
+            <p className="text-[#4A5568] text-base md:text-lg leading-relaxed">
+              Real people across Hyderabad, Vijayawada, and Visakhapatnam who resolved damaging bureau errors and regained their credit scores.
             </p>
           </div>
-          
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="flex gap-2">
-              <button 
-                onClick={() => handleScroll('left')}
-                className="p-2.5 rounded-full bg-white border border-line text-[#004AAD] hover:bg-[#F4F7FA] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD]"
-                aria-label="Previous review"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={() => handleScroll('right')}
-                className="p-2.5 rounded-full bg-white border border-line text-[#004AAD] hover:bg-[#F4F7FA] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD]"
-                aria-label="Next review"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-            <Link 
+
+          <div className="flex items-center">
+            <Link
               href="/client-success-stories"
-              className="text-sm font-semibold text-[#004AAD] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD] rounded-sm whitespace-nowrap"
+              className="text-xs font-bold uppercase tracking-wider text-[#0072CE] hover:underline px-3 py-2 whitespace-nowrap"
             >
-              View all reviews &rarr;
+              All Stories &rarr;
             </Link>
           </div>
         </div>
 
-        <div className="relative w-full overflow-hidden -mx-4 sm:mx-0 px-4 sm:px-0">
-          <div 
+        {/* Carousel Container */}
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+        >
+          {/* Scroll Track */}
+          <div
             ref={scrollRef}
-            className="flex gap-4 sm:gap-5 overflow-x-auto scroll-smooth pb-3"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className="flex gap-6 overflow-x-auto pb-4 scrollbar-none scroll-smooth"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {reviews.map((review, index) => (
-              <ReviewCard key={`${review.id}-${index}`} review={review} />
+            {allStories.map((review, idx) => (
+              <ReviewCard key={`${review.id}-${idx}`} review={review} />
             ))}
           </div>
+
+          {/* Left Arrow Controls for desktop */}
+          <button
+            onClick={() => handleManualScroll("left")}
+            aria-label="Previous Stories"
+            className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/95 border border-[#E2E8F0] shadow-md items-center justify-center text-[#0A2540] hover:text-[#0072CE] hover:shadow-lg transition-all focus-visible:outline-none z-10 cursor-pointer"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          {/* Right Arrow Controls for desktop */}
+          <button
+            onClick={() => handleManualScroll("right")}
+            aria-label="Next Stories"
+            className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/95 border border-[#E2E8F0] shadow-md items-center justify-center text-[#0A2540] hover:text-[#0072CE] hover:shadow-lg transition-all focus-visible:outline-none z-10 cursor-pointer"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>
   );
 }
-

@@ -3,69 +3,104 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-white/80 py-12 px-4 sm:px-6 border-t border-line">
+    <footer className="bg-[#0A2540] text-gray-300 py-16 px-4 sm:px-6 border-t border-slate-800">
       <div className="max-w-7xl mx-auto flex flex-col gap-12">
         {/* 4-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
 
           {/* Column 1: Brand blurb */}
           <div className="flex flex-col gap-4">
-            <div className="bg-white rounded-lg px-6 py-3 inline-flex items-center justify-center self-start w-fit">
+            <div className="bg-white rounded-lg px-5 py-2.5 inline-flex items-center justify-center self-start w-fit shadow-sm">
               <Image
                 src="/logo-footer.png"
                 alt="CIBIL Decoded"
-                width={160}
-                height={50}
-                className="h-10 w-auto"
+                width={339}
+                height={160}
+                className="h-9 w-auto"
               />
             </div>
-            <p className="text-sm leading-relaxed text-white/70">
-              Know your credit. Own your story. Credit-report guidance and loan-assistance service helping consumers navigate their financial journey.
+            <p className="text-sm leading-relaxed text-gray-300">
+              <strong className="text-white">Know your credit. Own your story.</strong> 
+              <br />Credit-report guidance and curated loan-assistance service helping consumers navigate their financial journey.
+            </p>
+            <div className="flex items-center gap-2 text-xs text-gray-400">
+              <span className="w-2 h-2 rounded-full bg-[#00C4B4]"></span>
+              <span>Telangana &amp; Andhra Pradesh</span>
+            </div>
+          </div>
+
+          {/* Column 2: Contact Details */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-white font-heading font-semibold text-base mb-1">
+              Contact Us
+            </h3>
+            <p className="text-sm text-gray-300">
+              Email:{" "}
+              <a
+                href="mailto:cibildecoded@gmail.com"
+                className="text-white hover:text-[#00C4B4] transition-colors font-medium underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0072CE] rounded-sm"
+              >
+                cibildecoded@gmail.com
+              </a>
+            </p>
+            <p className="text-xs text-gray-400 mt-2 leading-relaxed">
+              Have questions regarding your report? Write to us and a credit analyst will review your inquiry within 24 hours.
             </p>
           </div>
 
-          {/* Column 2: Contact Placeholders */}
-          <div className="flex flex-col gap-3">
-            <h3 className="text-white font-sora font-semibold mb-2">Contact Us</h3>
-            {/* <p className="text-sm">Phone: <a href="tel:+919876543210" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD] focus-visible:ring-offset-2 rounded-sm">Will soon be available</a></p> */}
-            <p className="text-sm">Email: <a href="mailto:support@cibildecoded.in" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD] focus-visible:ring-offset-2 rounded-sm">cibildecoded@gmail.com</a></p>
-            {/* <p className="text-sm">WhatsApp: <a href="https://wa.me/919876543210" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD] focus-visible:ring-offset-2 rounded-sm">Will soon be available</a></p> */}
-          </div>
-
-          {/* Column 3: Links */}
-          <div className="flex flex-col gap-3">
-            <h3 className="text-white font-sora font-semibold mb-2">Legal</h3>
-            <Link href="/privacy" className="text-sm hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD] focus-visible:ring-offset-2 rounded-sm">Privacy Policy</Link>
-            <Link href="/terms" className="text-sm hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD] focus-visible:ring-offset-2 rounded-sm">Terms of Service</Link>
-            <Link href="/grievance" className="text-sm hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004AAD] focus-visible:ring-offset-2 rounded-sm">Grievance Redressal</Link>
-            <p className="text-xs text-white/70 mt-2 italic leading-relaxed">
+          {/* Column 3: Legal Links */}
+          <div className="flex flex-col gap-2.5">
+            <h3 className="text-white font-heading font-semibold text-base mb-1">
+              Legal &amp; Policy
+            </h3>
+            <Link
+              href="/privacy"
+              className="text-sm text-gray-300 hover:text-[#00C4B4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0072CE] rounded-sm"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="text-sm text-gray-300 hover:text-[#00C4B4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0072CE] rounded-sm"
+            >
+              Terms of Service
+            </Link>
+            <Link
+              href="/grievance"
+              className="text-sm text-gray-300 hover:text-[#00C4B4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0072CE] rounded-sm"
+            >
+              Grievance Redressal
+            </Link>
+            <p className="text-xs text-gray-400 mt-2 italic leading-relaxed">
               If you ever have a concern about our service, talk to us directly first. We respond honestly and work to resolve it properly.
             </p>
           </div>
 
           {/* Column 4: Business Details */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-white font-sora font-semibold mb-2">Business Details</h3>
-            <p className="text-sm">CIBIL Decoded Services</p>
-            <p className="text-sm leading-relaxed">
-              {/* [Office Address Line 1] */}
+            <h3 className="text-white font-heading font-semibold text-base mb-1">
+              Business Office
+            </h3>
+            <p className="text-sm font-semibold text-white">CIBIL Decoded Services</p>
+            <p className="text-sm leading-relaxed text-gray-300">
               Kukatpally, Hyderabad, Telangana<br />
-              India - 500072
+              India &ndash; 500072
             </p>
-            {/* <p className="text-sm mt-2 text-white/60">CIN: [Placeholder CIN]</p> */}
+            <p className="text-xs text-gray-400 mt-1">
+              Serving consumers nationwide across India.
+            </p>
           </div>
         </div>
 
         {/* Disclaimer + copyright */}
-        <div className="border-t border-white/10 pt-8 flex flex-col items-center gap-4">
-          <p className="text-xs text-center max-w-4xl leading-relaxed text-white/60">
-            <strong>Disclaimer:</strong> CIBIL Decoded is an independent credit-report guidance and loan-assistance service.
-            We are <strong>not</strong> affiliated with TransUnion CIBIL, Experian, Equifax, or CRIF High Mark.
-            We are not a credit bureau and are not RBI-regulated. We do not provide loans directly, nor do we guarantee any specific
-            outcomes regarding your credit score or loan approval. All services are subject to our terms and conditions.
+        <div className="border-t border-slate-700/60 pt-8 flex flex-col items-center gap-4">
+          <p className="text-xs text-center max-w-4xl leading-relaxed text-gray-400">
+            <strong className="text-gray-300">Non-Affiliation Disclaimer:</strong> CIBIL Decoded is an independent credit-report guidance and loan-assistance consultancy.
+            We are <strong>not</strong> affiliated with, associated with, authorized by, endorsed by, or in any way officially connected with TransUnion CIBIL Limited, Experian, Equifax, or CRIF High Mark.
+            We are not a credit bureau and are not RBI-regulated. We do not provide loans directly, nor do we guarantee any specific outcomes regarding your credit score or third-party loan sanctions.
           </p>
-          <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} CIBIL Decoded. All rights reserved.
+          <p className="text-xs text-gray-400">
+            &copy; {new Date().getFullYear()} CIBIL Decoded. All rights reserved.
           </p>
         </div>
       </div>

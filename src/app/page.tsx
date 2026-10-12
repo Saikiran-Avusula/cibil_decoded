@@ -1,6 +1,7 @@
 import { Header } from "@/components/sections/Header";
 import { Hero } from "@/components/sections/Hero";
 import { WhatWeSolve } from "@/components/sections/WhatWeSolve";
+import { FeatureComparison } from "@/components/sections/FeatureComparison";
 import { Bureaus } from "@/components/sections/Bureaus";
 import { Process } from "@/components/sections/Process";
 import { Problems } from "@/components/sections/Problems";
@@ -20,12 +21,12 @@ export default function Home() {
     <>
       <Header />
       {/*
-       * pt-[70px]: 38px logo + 16px top padding + 16px bottom padding = 70px navbar.
-       * Matches the header's default (non-scrolled) height exactly.
+       * pt-[74px]: navbar offset
        */}
-      <main className="pt-[70px]">
+      <main className="pt-[74px]">
         <Hero />
         <WhatWeSolve />
+        <FeatureComparison />
         <Bureaus />
         <Process />
         <Problems />

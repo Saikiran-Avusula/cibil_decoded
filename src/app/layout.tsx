@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Sora, Source_Sans_3 } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const sora = Sora({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-sora",
-  weight: ["700"],
-});
-
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-source-sans",
-  weight: ["400", "600"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -21,15 +16,18 @@ export const metadata: Metadata = {
   description:
     "Credit-report guidance and loan-assistance service in Hyderabad. We help you understand your credit report, identify discrepancies, and navigate disputes.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/logo.png",
+    // favicon.ico is auto-served from src/app/favicon.ico by Next.js App Router
+    apple: "/apple-touch-icon.png",
+    other: [
+      { rel: "icon", type: "image/png", sizes: "192x192", url: "/icon-192.png" },
+      { rel: "icon", type: "image/png", sizes: "512x512", url: "/icon-512.png" },
+    ],
   },
   openGraph: {
     title: "CIBIL Decoded",
     description:
       "Know your credit. Own your story. Credit-report guidance and loan assistance — Hyderabad.",
-    images: [{ url: "/logo.png", width: 1080, height: 1080, alt: "CIBIL Decoded logo" }],
+    images: [{ url: "/logo.png", width: 1080, height: 1080, alt: "CIBIL Decoded — glossy logo" }],
     locale: "en_IN",
     type: "website",
   },
@@ -41,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${sora.variable} ${sourceSans.variable}`}>
+    <html lang="en" className={`${plusJakartaSans.variable} font-sans`}>
       <body className="antialiased">
         {children}
         <script
@@ -54,6 +52,7 @@ export default function RootLayout({
               "description": "Credit-report guidance and loan-assistance service.",
               "url": "https://cibildecoded.in",
               "logo": "https://cibildecoded.in/logo.png",
+              "image": "https://cibildecoded.in/logo.png",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "[Placeholder Address Line 1]",
