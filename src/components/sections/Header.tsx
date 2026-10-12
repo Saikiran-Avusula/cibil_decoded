@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
   { label: "What we do", href: "/#what-we-solve" },

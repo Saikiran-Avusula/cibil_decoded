@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { MessageCircleQuestion, ShieldAlert, Lock, ArrowRight, Headphones, CheckCircle2 } from "lucide-react";
+import { MessageCircleQuestion, ArrowRight, Headphones, CheckCircle2 } from "lucide-react";
 
 const FAQS = [
   {

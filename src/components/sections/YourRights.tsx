@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { 
   Scale, 
   FileCheck2, 
@@ -11,14 +10,10 @@ import {
   ArrowRight, 
   ExternalLink,
   ShieldAlert,
-  HelpCircle,
-  FileSearch,
-  CheckCircle2
+  FileSearch
 } from "lucide-react";
-import { getYourRightsFacts, FACTS_REGISTER } from "@/lib/facts";
 
 export function YourRights() {
-  const rightsFacts = getYourRightsFacts();
 
   const scenarios = [
     {

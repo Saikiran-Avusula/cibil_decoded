@@ -27,17 +27,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { 
   Video, 
-  Phone, 
-  Calendar, 
   Clock, 
   ShieldCheck, 
   CheckCircle2, 
-  Lock, 
   ArrowRight, 
   FileSearch, 
   Sparkles,
-  HelpCircle,
-  Mail,
   UserCheck
 } from "lucide-react";
 import Link from "next/link";

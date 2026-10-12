@@ -2,7 +2,6 @@
 
 import { Fragment } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 
 import { getHeroFacts } from "@/lib/facts";
 

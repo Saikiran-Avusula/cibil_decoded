@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Headphones, ShieldCheck, Lock } from "lucide-react";
+import { Headphones, ShieldCheck } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -124,7 +124,7 @@ export function ContactForm() {
                   <ShieldCheck className="w-5 h-5 text-[#D97706] flex-shrink-0 mt-0.5" />
                   <div className="space-y-0.5">
                     <strong className="text-[#78350F] block">Zero Credential Request Policy:</strong>
-                    <span>We never ask for your PAN, Aadhaar, bank details, passwords or OTP. Please don't enter them here.</span>
+                    <span>We never ask for your PAN, Aadhaar, bank details, passwords or OTP. Please don&apos;t enter them here.</span>
                   </div>
                 </div>
 

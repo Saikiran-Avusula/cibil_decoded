@@ -6,7 +6,6 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Star, 
-  ShieldCheck, 
   CheckCircle, 
   TrendingUp,
   ShieldAlert,

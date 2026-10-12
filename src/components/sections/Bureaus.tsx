@@ -1,4 +1,4 @@
-import { Building2, ShieldCheck, FileText, CheckCircle2 } from "lucide-react";
+import { Building2, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export function Bureaus() {
   const bureaus = [

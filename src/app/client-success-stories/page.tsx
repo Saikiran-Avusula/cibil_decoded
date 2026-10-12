@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
-import { ALL_REVIEWS, Review } from "@/lib/reviews-data";
+import { ALL_REVIEWS } from "@/lib/reviews-data";
 import { 
   Star, 
   TrendingUp, 
