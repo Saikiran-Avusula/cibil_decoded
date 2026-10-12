@@ -4,6 +4,7 @@ import { WhatWeSolve } from "@/components/sections/WhatWeSolve";
 import { FeatureComparison } from "@/components/sections/FeatureComparison";
 import { Bureaus } from "@/components/sections/Bureaus";
 import { Process } from "@/components/sections/Process";
+import { YourRights } from "@/components/sections/YourRights";
 import { Problems } from "@/components/sections/Problems";
 import { Loans } from "@/components/sections/Loans";
 import { Consultation } from "@/components/sections/Consultation";
@@ -29,6 +30,7 @@ export default function Home() {
         <FeatureComparison />
         <Bureaus />
         <Process />
+        <YourRights />
         <Problems />
         <Loans />
         <Consultation />

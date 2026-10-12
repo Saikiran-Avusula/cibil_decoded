@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+export const metadata = {
+  title: "Grievance Redressal | CIBIL Decoded",
+  description: "Learn how to submit customer service concerns and escalate grievances at CIBIL Decoded.",
+};
+
 export default function GrievancePage() {
   return (
     <div className="min-h-screen bg-page-bg py-12 px-4 sm:px-6">

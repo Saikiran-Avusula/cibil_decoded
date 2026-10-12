@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { 
   Video, 
   Phone, 
@@ -47,9 +48,13 @@ const bookingSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
   city: z.string().min(2, "City is required."),
   meetingType: z.string().min(1, "Please select consultation format."),
-  dateTime: z.string().min(1, "Please select your preferred date and time."),
+  dateTime: z.string().min(1, "Please select your preferred date and time.").refine((val) => {
+    const d = new Date(val);
+    return !isNaN(d.getTime()) && d.getTime() > Date.now();
+  }, "Please select a date and time in the future."),
   topic: z.string().min(1, "Please select the primary issue."),
-  description: z.string().optional(),
+  description: z.string().max(800, "Description cannot exceed 800 characters.").optional(),
+  consent: z.boolean().refine((val) => val === true, "You must agree to our terms and privacy policy to book."),
   honeypot: z.string().max(0).optional(),
 });
 
@@ -70,6 +75,7 @@ export default function BookMeetingPage() {
       dateTime: "",
       topic: "",
       description: "",
+      consent: false,
       honeypot: "",
     },
   });
@@ -474,6 +480,36 @@ export default function BookMeetingPage() {
                               <FormControl>
                                 <Input tabIndex={-1} autoComplete="off" {...field} />
                               </FormControl>
+                            </FormItem>
+                          )}
+                        />
+
+                        {/* Mandatory Consent Checkbox per W-09 */}
+                        <FormField
+                          control={form.control}
+                          name="consent"
+                          render={({ field }) => (
+                            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-xl border border-[#E2E8F0] p-4 bg-[#F8FAFC]">
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <div className="space-y-1 leading-none">
+                                <FormLabel className="text-xs text-[#4A5568] font-normal leading-relaxed cursor-pointer">
+                                  I consent to CIBIL Decoded reviewing my case details and contacting me for this consultation. I agree to the{" "}
+                                  <Link href="/privacy" className="text-[#0072CE] underline hover:text-blue-800" target="_blank">
+                                    Privacy Policy
+                                  </Link>{" "}
+                                  and{" "}
+                                  <Link href="/terms" className="text-[#0072CE] underline hover:text-blue-800" target="_blank">
+                                    Terms of Service
+                                  </Link>
+                                  .
+                                </FormLabel>
+                                <FormMessage className="text-xs text-red-600 font-medium" />
+                              </div>
                             </FormItem>
                           )}
                         />

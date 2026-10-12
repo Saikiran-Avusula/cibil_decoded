@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+export const metadata = {
+  title: "Privacy Policy | CIBIL Decoded",
+  description: "Learn how CIBIL Decoded protects your data, personal information, and credit inquiries.",
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-page-bg py-12 px-4 sm:px-6">

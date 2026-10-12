@@ -17,7 +17,7 @@ const FAQS = [
   },
   {
     question: "How long does it typically take to see corrections on my credit report?",
-    answer: "Under RBI guidelines, credit bureaus (TransUnion CIBIL, Experian, Equifax, CRIF) have a 30 to 45-day window to investigate disputes with the reporting bank and issue corrections. Once the lending institution confirms the error, the bureau updates your record immediately.",
+    answer: "Under RBI guidelines, credit institutions and credit bureaus are required to investigate and resolve disputes within 30 days. If an inaccurate reporting dispute remains unresolved beyond 30 days, RBI regulations provide compensation of ₹100 for each day of delay.",
   },
   {
     question: "Why does my score differ between CIBIL, Experian, and Equifax?",

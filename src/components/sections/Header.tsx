@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "What we do", href: "/#what-we-solve" },
   { label: "Credit bureaus", href: "/#bureaus" },
   { label: "Process", href: "/#process" },
+  { label: "Your rights", href: "/#your-rights" },
   { label: "Loans", href: "/#loans" },
   { label: "Reviews", href: "/#reviews" },
   { label: "FAQ", href: "/#faq" },

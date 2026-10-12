@@ -48,21 +48,21 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "name": "CIBIL Decoded",
-              "description": "Credit-report guidance and loan-assistance service.",
+              "name": "CIBIL Decoded Services",
+              "description": "Independent credit-report guidance and loan-assistance consultancy in Hyderabad.",
               "url": "https://cibildecoded.in",
               "logo": "https://cibildecoded.in/logo.png",
               "image": "https://cibildecoded.in/logo.png",
+              "email": "cibildecoded@gmail.com",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "[Placeholder Address Line 1]",
+                "streetAddress": "Kukatpally",
                 "addressLocality": "Hyderabad",
                 "addressRegion": "Telangana",
-                "postalCode": "500001",
+                "postalCode": "500072",
                 "addressCountry": "IN"
               },
-              "telephone": "[Placeholder Phone Number]",
-              "priceRange": "$$"
+              "areaServed": ["Telangana", "Andhra Pradesh"]
             })
           }}
         />

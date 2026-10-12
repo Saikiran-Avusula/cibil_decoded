@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+export const metadata = {
+  title: "Terms of Service | CIBIL Decoded",
+  description: "Terms and conditions for consulting and credit dispute guidance with CIBIL Decoded.",
+};
+
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-page-bg py-12 px-4 sm:px-6">

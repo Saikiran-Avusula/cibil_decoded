@@ -4,6 +4,8 @@ import { Fragment } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
+import { getHeroFacts } from "@/lib/facts";
+
 // ─── Sample report data ───────────────────────────────────────────────────────
 interface ReportRow {
   account: string;
@@ -15,16 +17,14 @@ interface ReportRow {
 }
 
 const SAMPLE_ROWS: ReportRow[] = [
-  { account: "Home Loan",     lender: "HDFC Bank",     status: "Closed", balance: "₹0"      },
-  { account: "Credit Card",   lender: "SBI Cards",     status: "Active", balance: "₹12,400" },
+  { account: "Home Loan",     lender: "National Housing Finance", status: "Closed", balance: "₹0"      },
+  { account: "Credit Card",   lender: "Premier Card Services",    status: "Active", balance: "₹12,400" },
   {
-    account: "Personal Loan", lender: "Bajaj Finserv", status: "Active", balance: "₹0",
+    account: "Personal Loan", lender: "Consumer Finance Ltd",     status: "Active", balance: "₹0",
     flagged: true,
     flagLabel: "Loan closed, balance zero, still marked active",
   },
 ];
-
-// ─── Sample Report Card ───────────────────────────────────────────────────────
 
 // ─── Sample Report Card ───────────────────────────────────────────────────────
 
@@ -49,7 +49,7 @@ function SampleReportCard({ rows }: { rows: ReportRow[] }) {
       </div>
 
       <p className="text-[11px] text-[#4A5568] text-center px-4 pt-3 pb-1 italic">
-        Sample illustration of actual bureau discrepancy review
+        Sample illustration of actual bureau discrepancy review (neutral mock data)
       </p>
 
       <div className="overflow-x-auto">
@@ -99,13 +99,19 @@ function SampleReportCard({ rows }: { rows: ReportRow[] }) {
         </table>
       </div>
 
-      {/* Card Footer with resolution pill */}
+      {/* Card Footer with resolution pill & regulatory tie-in link */}
       <div className="bg-[#F8FAFC] border-t border-[#E2E8F0] px-4 py-3 flex items-center justify-between text-xs">
         <span className="text-[#4A5568] font-medium">Bureaus reviewed: CIBIL, Experian</span>
         <span className="text-[#0072CE] font-semibold flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00C4B4]"></span>
           Ready for Dispute
         </span>
+      </div>
+      <div className="bg-[#F1F5F9] border-t border-[#E2E8F0] px-4 py-2 text-[11px] text-[#4A5568] text-center">
+        If a complaint about an entry like this is not resolved within 30 days, RBI rules provide ₹100 for each day of delay.{" "}
+        <a href="#your-rights" className="text-[#0072CE] font-bold hover:underline inline-flex items-center gap-0.5">
+          See your rights &rarr;
+        </a>
       </div>
     </div>
   );
@@ -115,6 +121,7 @@ function SampleReportCard({ rows }: { rows: ReportRow[] }) {
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const heroFacts = getHeroFacts();
 
   return (
     <section className="bg-white pt-10 pb-12 md:pt-14 md:pb-16 px-4 sm:px-6 relative overflow-hidden">
@@ -153,7 +160,7 @@ export function Hero() {
               <a
                 href="#contact"
                 id="hero-cta-primary"
-                className="bg-[#FF6B00] hover:bg-orange-600 text-white font-semibold text-base px-6 py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-center transform hover:-translate-y-0.5 inline-flex items-center justify-center"
+                className="bg-[#FF6B00] hover:bg-orange-600 text-white font-semibold text-base px-6 py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-center transform hover:-translate-y-0.5 inline-flex items-center justify-center cursor-pointer"
               >
                 Get your credit issue reviewed
               </a>
@@ -162,13 +169,37 @@ export function Hero() {
               <a
                 href="#loans"
                 id="hero-cta-secondary"
-                className="border-2 border-[#0072CE] text-[#0072CE] hover:bg-[#0072CE]/10 font-semibold text-base px-6 py-3.5 rounded-lg transition-all duration-200 text-center inline-flex items-center justify-center"
+                className="border-2 border-[#0072CE] text-[#0072CE] hover:bg-[#0072CE]/10 font-semibold text-base px-6 py-3.5 rounded-lg transition-all duration-200 text-center inline-flex items-center justify-center cursor-pointer"
               >
                 Explore loan options
               </a>
             </div>
 
-            <div className="pt-2 flex items-center gap-2 text-xs text-[#4A5568]">
+            {/* Hero Fact Strip (Section 5.1 & F-01, F-04, F-02) */}
+            {heroFacts && (
+              <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2">
+                <div className="flex items-center justify-between text-[11px] text-[#718096]">
+                  <span className="font-semibold text-[#0A2540]">RBI Statutory Directives</span>
+                  <span>Checked 12 Oct 2026</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 text-xs text-[#4A5568] pt-1">
+                  <div className="sm:border-r sm:border-[#E2E8F0] sm:pr-2 leading-snug">
+                    <strong className="text-[#0A2540] block text-[11px]">4x Monthly Reporting</strong>
+                    Lenders report data as on 9th, 16th, 23rd &amp; month-end.
+                  </div>
+                  <div className="sm:border-r sm:border-[#E2E8F0] sm:pr-2 leading-snug">
+                    <strong className="text-[#0A2540] block text-[11px]">₹100/Day Delay Rule</strong>
+                    Complaints unresolved after 30 days earn compensation.
+                  </div>
+                  <div className="leading-snug">
+                    <strong className="text-[#0A2540] block text-[11px]">Free Annual Report</strong>
+                    1 full report with score per year from each of 4 bureaus.
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="pt-1 flex items-center gap-2 text-xs text-[#4A5568]">
               <span className="inline-block w-2 h-2 rounded-full bg-[#4CD964]"></span>
               <span>Serving Telangana &amp; Andhra Pradesh &nbsp;&bull;&nbsp; Not affiliated with any credit bureau &nbsp;&bull;&nbsp; 100% Private</span>
             </div>
